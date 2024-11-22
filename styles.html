@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Divs</title>
+  
+  <style>
+   
+    .main {
+      display: flex;
+      background-color: black;
+      height: 400px; 
+      width: 96%;
+      justify-content: center;
+      align-items: flex-end; 
+      overflow: hidden;
+      padding: 2%;
+    }
+
+    /* Child divs with different colors */
+    .child {
+      width: 19%;
+      height: 100%; 
+      transition: height 1s ease; 
+    }
+
+    .child:nth-child(1) {
+      background-color: blueviolet;
+    }
+
+    .child:nth-child(2) {
+      background-color: violet;
+    }
+
+    .child:nth-child(3) {
+      background-color: rgb(188, 48, 48);
+    }
+
+    .child:nth-child(4) {
+      background-color: orangered;
+    }
+
+    .child:nth-child(5) {
+      background-color: yellow;
+    }
+
+  
+    .buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+  
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      color: white;
+      border-radius: 5px;
+    }
+
+  </style>
+  
+</head>
+<body>
+ 
+  <div class="main" id="main">
+    <div class="child" id="div1"></div>
+    <div class="child" id="div2"></div>
+    <div class="child" id="div3"></div>
+    <div class="child" id="div4"></div>
+    <div class="child" id="div5"></div>
+  </div>
+
+ 
+  <div class="buttons">
+    <button style="background:green"  onclick="startAnimation()">Start</button>
+    <button style="background:blueviolet" onclick="resetAnimation()">Reset</button>
+    <button style="background:red" onclick="stopAnimation()">Stop</button>
+  </div>
+
+
+  <script>
+  
+    let animationInterval; 
+    const divs = [
+      document.getElementById('div1'),
+      document.getElementById('div2'),
+      document.getElementById('div3'),
+      document.getElementById('div4'),
+      document.getElementById('div5')
+    ];
+
+
+
+    function startAnimation() {
+      stopAnimation(); // For clearing any existing intervals
+      animationInterval = setInterval(() => {
+        divs.forEach((div, index) => {
+          const randomHeight = Math.random() * 80 + 20; // Random height between 20% and  nearly 100%  ((0.0 to 0.99 * 80)+ 20%)
+          div.style.height = randomHeight + '%';
+        });
+      }, 1000); 
+    }
+
+   
+    function resetAnimation() {
+      stopAnimation();
+      divs.forEach(div => {
+        div.style.height = '100%';
+      });
+    }
+
+   
+    function stopAnimation() {
+      clearInterval(animationInterval); 
+    }
+    
+  </script>
+</body>
+</html>
